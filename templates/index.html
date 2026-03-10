@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mr. Mac AI Technical Support Copilot</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f7;
+            color: #1d1d1f;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #007aff, #5856d6);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .demo-notice {
+            background: #ffcc02;
+            color: #1d1d1f;
+            padding: 15px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            height: calc(100vh - 140px);
+        }
+        
+        .panel {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        .panel h2 {
+            margin-bottom: 15px;
+            color: #007aff;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 10px;
+        }
+        
+        .customer-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .info-card {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #007aff;
+        }
+        
+        .info-card h3 {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .info-card p {
+            font-weight: 600;
+        }
+        
+        .ai-guidance {
+            background: #e8f5e8;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 4px solid #34c759;
+        }
+        
+        .confidence-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        
+        .confidence-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff3b30, #ff9500, #34c759);
+            transition: width 0.3s ease;
+        }
+        
+        .guidance-step {
+            background: white;
+            border: 1px solid #d1d1d6;
+            border-radius: 6px;
+            padding: 12px;
+            margin: 8px 0;
+            position: relative;
+        }
+        
+        .guidance-step::before {
+            content: "📱";
+            position: absolute;
+            left: -30px;
+            top: 12px;
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        .status-active { background: #34c759; }
+        .status-listening { background: #007aff; }
+        .status-analyzing { background: #ff9500; }
+        
+        .live-analysis {
+            border: 2px solid #34c759;
+            background: linear-gradient(135deg, #f0fff4, #e8f5e8);
+        }
+        
+        .existing-solution {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border: 2px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .existing-solution h3 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+        
+        .existing-solution p {
+            color: #664d03;
+            font-size: 14px;
+        }
+        
+        .demo-controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #007aff;
+            color: white;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,122,255,0.3);
+        }
+        
+        button {
+            background: #007aff;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        
+        button:hover {
+            background: #0051d0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🍎 Mr. Mac AI Technical Support Copilot</h1>
+        <p>Real-time AI assistance for junior technicians</p>
+    </div>
+    
+    <div class="demo-notice">
+        ⚠️ DEMO PREVIEW — Full AI Copilot solution already exists. Founder will demonstrate live capabilities during call.
+    </div>
+    
+    <div class="container">
+        <div class="panel">
+            <h2><span class="status-indicator status-active"></span>Live Customer Session</h2>
+            
+            <div class="customer-info">
+                <div class="info-card">
+                    <h3>Current Customer</h3>
+                    <p id="customer-name">Loading...</p>
+                    <p id="customer-phone" style="color: #666; font-size: 14px;"></p>
+                </div>
+                <div class="info-card">
+                    <h3>Device & History</h3>
+                    <p id="customer-device">Loading...</p>
+                    <p id="previous-issues" style="color: #666; font-size: 14px;"></p>
+                </div>
+                <div class="info-card">
+                    <h3>Today's Appointment</h3>
+                    <p id="appointment-time">Loading...</p>
+                    <p id="appointment-issue" style="color: #666; font-size: 14px;"></p>
+                </div>
+                <div class="info-card">
+                    <h3>Screen Share Status</h3>
+                    <p><span class="status-indicator status-listening"></span>SharePlay Active</p>
+                    <p style="color: #666; font-size: 14px;">Analyzing screen content...</p>
+                </div>
+            </div>
+            
+            <div class="existing-solution">
+                <h3>🎯 AI Screen Analysis Engine</h3>
+                <p>This solution already exists — founder will demo live screen analysis during call.<br>
+                <strong>Capability:</strong> Real-time iPhone/Mac screen analysis via Vision API</p>
+            </div>
+            
+            <div class="ai-guidance live-analysis">
+                <h3>🤖 AI Analysis Results</h3>
+                <div id="screen-analysis">
+                    <p><strong>Detected Issue:</strong> <span id="detected-issue">Analyzing...</span></p>
+                    <p><strong>AI Confidence:</strong> <span id="confidence-score">--</span>%</p>
+                    <div class="confidence-bar">
+                        <div class="confidence-fill" id="confidence-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="panel">
+            <h2><span class="status-indicator status-analyzing"></span>AI Guidance for Technician</h2>
+            
+            <div class="existing-solution">
+                <h3>💬 Conversation Analysis Engine</h3>
+                <p>This solution already exists — founder will demo live call analysis during call.<br>
+                <strong>Capability:</strong> Real-time conversation sentiment and context analysis</p>
+            </div>
+            
+            <div class="ai-guidance">
+                <h3>📞 What to say to customer:</h3>
+                <div id="empathy-response" style="background: #fff3cd; padding: 10px; border-radius: 6px; margin: 10px 0; border-left: 4px solid #ffc107;">
+                    <strong>Empathy Response:</strong><br>
+                    <span id="empathy-text">Analyzing customer sentiment...</span>
+                </div>
+                
+                <h3>🔧 Step-by-step guidance:</h3>
+                <div id="guidance-steps">
+                    Loading AI suggestions...
+                </div>
+                
+                <div style="background: #f0f0f0; padding: 10px; border-radius: 6px; margin-top: 15px;">
+                    <small><strong>💡 Pro tip:</strong> Read these instructions exactly as written. The AI has generated them in simple language for the customer.</small>
+                </div>
+            </div>
+            
+            <div class="existing-solution">
+                <h3>📚 Mr. Mac Knowledge Base</h3>
+                <p>This solution already exists — founder will demo live SOP integration during call.<br>
+                <strong>Contains:</strong> Scott's repair procedures, Apple documentation, historical case solutions</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="demo-controls">
+        <div style="font-size: 12px; margin-bottom: 10px;">Demo Controls</div>
+        <button onclick="simulateNewCall()">🔄 Simulate New Call</button>
+        <button onclick="triggerScreenAnalysis()">📱 Analyze Screen</button>
+    </div>
+
+    <script>
+        let currentCustomer = null;
+        let currentAppointment = null;
+        
+        // Load initial data
+        async function loadInitialData() {
+            try {
+                const customerResponse = await fetch('/api/current_customer');
+                currentCustomer = await customerResponse.json();
+                
+                const appointmentResponse = await fetch('/api/current_appointment');
+                currentAppointment = await appointmentResponse.json();
+                
+                updateCustomerDisplay();
+                
+                // Simulate screen analysis after 2 seconds
+                setTimeout(triggerScreenAnalysis, 2000);
+                
+            } catch (error) {
+                console.error('Error loading data:', error);
+                // Fallback to mock data
+                loadFallbackData();
+            }
+        }
+        
+        function updateCustomerDisplay() {
+            if (!currentCustomer) return;
+            
+            document.getElementById('customer-name').textContent = currentCustomer.name;
+            document.getElementById('customer-phone').textContent = currentCustomer.phone;
+            document.getElementById('customer-device').textContent = currentCustomer.device;
+            document.getElementById('previous-issues').textContent = `Last issue: ${currentCustomer.previousIssues[0]}`;
+            
+            if (currentAppointment) {
+                document.getElementById('appointment-time').textContent = currentAppointment.time;
+                document.getElementById('appointment-issue').textContent = currentAppointment.issue;
+            }
+        }
+        
+        async function triggerScreenAnalysis() {
+            try {
+                const response = await fetch('/api/analyze_screen', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ screen_data: 'mock_screen' })
+                });
+                
+                const analysis = await response.json();
+                
+                document.getElementById('detected-issue').textContent = analysis.detected_issue;
+                document.getElementById('confidence-score').textContent = Math.round(analysis.confidence * 100);
+                document.getElementById('confidence-fill').style.width = (analysis.confidence * 100) + '%';
+                
+                // Update guidance steps
+                const stepsContainer = document.getElementById('guidance-steps');
+                stepsContainer.innerHTML = analysis.suggested_guidance.map((step, index) => 
+                    `<div class="guidance-step">${index + 1}. ${step}</div>`
+                ).join('');
+                
+                // Simulate conversation analysis
+                setTimeout(analyzeConversation, 1000);
+                
+            } catch (error) {
+                console.error('Screen analysis failed:', error);
+            }
+        }
+        
+        async function analyzeConversation() {
+            try {
+                const response = await fetch('/api/analyze_conversation', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ audio_data: 'mock_audio' })
+                });
+                
+                const analysis = await response.json();
+                
+                document.getElementById('empathy-text').textContent = analysis.suggested_empathy;
+                
+            } catch (error) {
+                console.error('Conversation analysis failed:', error);
+            }
+        }
+        
+        function simulateNewCall() {
+            // Reset display
+            document.getElementById('detected-issue').textContent = 'Analyzing new screen share...';
+            document.getElementById('confidence-score').textContent = '--';
+            document.getElementById('confidence-fill').style.width = '0%';
+            document.getElementById('guidance-steps').innerHTML = 'Loading AI suggestions...';
+            document.getElementById('empathy-text').textContent = 'Analyzing customer sentiment...';
+            
+            // Simulate new analysis
+            setTimeout(triggerScreenAnalysis, 1500);
+        }
+        
+        function loadFallbackData() {
+            // Fallback mock data if APIs fail
+            currentCustomer = {
+                name: "Jennifer Martinez",
+                phone: "(512) 555-0143",
+                device: "iPhone 14 Pro",
+                previousIssues: ["iCloud backup failure", "App Store payment issue"]
+            };
+            
+            currentAppointment = {
+                time: "2:15 PM Today",
+                issue: "Email not working after iOS update"
+            };
+            
+            updateCustomerDisplay();
+            setTimeout(triggerScreenAnalysis, 2000);
+        }
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', loadInitialData);
+    </script>
+</body>
+</html>

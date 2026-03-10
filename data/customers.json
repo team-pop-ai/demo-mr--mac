@@ -1,0 +1,33 @@
+[
+  {
+    "id": "cust_001",
+    "name": "Jennifer Martinez",
+    "phone": "(512) 555-0143",
+    "email": "j.martinez@techstartup.com",
+    "device": "iPhone 14 Pro",
+    "previousIssues": [
+      "iCloud backup failure",
+      "App Store payment issue",
+      "Exchange email setup"
+    ],
+    "hubspotId": "12345",
+    "customerSince": "2023-08-15",
+    "preferredContact": "phone",
+    "notes": "Works at tech startup, needs work email working ASAP"
+  },
+  {
+    "id": "cust_002", 
+    "name": "Robert Chen",
+    "phone": "(737) 555-0298",
+    "email": "robert.chen@gmail.com",
+    "device": "MacBook Air M2",
+    "previousIssues": [
+      "Time Machine backup not working",
+      "WiFi connectivity drops"
+    ],
+    "hubspotId": "12346",
+    "customerSince": "2023-03-22",
+    "preferredContact": "phone",
+    "notes": "College student, budget conscious"
+  }
+]

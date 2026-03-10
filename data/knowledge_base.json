@@ -1,0 +1,84 @@
+[
+  {
+    "id": "kb_001",
+    "title": "iPhone Email Setup - Exchange Configuration",
+    "category": "email_setup",
+    "difficulty": "beginner",
+    "estimatedTime": "3-5 minutes",
+    "steps": [
+      "Open Settings app on iPhone",
+      "Tap 'Mail' then 'Accounts'", 
+      "Tap 'Add Account' then 'Microsoft Exchange'",
+      "Enter work email address",
+      "For server, use: outlook.office365.com",
+      "Enter work password",
+      "Tap 'Next' and wait for verification",
+      "Choose which items to sync (Mail, Contacts, Calendars)",
+      "Tap 'Save'"
+    ],
+    "commonIssues": [
+      "Server field shows wrong address - update to outlook.office365.com",
+      "Password incorrect - have customer verify with IT",
+      "Account already exists - delete old one first"
+    ],
+    "scottsSOP": "Always verify they're entering their WORK email, not personal. 90% of failures are wrong server address.",
+    "escalateIf": [
+      "Customer doesn't know work email password",
+      "Company uses custom Exchange server",
+      "Two-factor authentication required"
+    ]
+  },
+  {
+    "id": "kb_002", 
+    "title": "Identifying Phone Scams - Customer Education",
+    "category": "scam_prevention",
+    "difficulty": "beginner",
+    "estimatedTime": "2-3 minutes",
+    "steps": [
+      "Reassure customer they did the right thing by calling",
+      "Explain: Apple never calls customers about viruses",
+      "Show them Settings > Privacy & Security > Safety Check",
+      "Review installed apps - look for anything unfamiliar",
+      "Check Safari for suspicious bookmarks or homepage changes",
+      "Enable automatic iOS updates in Settings > General > Software Update"
+    ],
+    "redFlags": [
+      "Popup claiming 'Your iPhone is infected'",
+      "Phone call claiming to be from Apple Support", 
+      "Request to install remote access apps",
+      "Demands for immediate payment or gift cards"
+    ],
+    "scottsSOP": "Never shame the customer. Praise them for being cautious. Most are embarrassed - make them feel smart for calling.",
+    "escalateIf": [
+      "Customer already gave personal info to scammer",
+      "Suspicious apps installed that won't delete",
+      "Financial accounts may be compromised"
+    ]
+  },
+  {
+    "id": "kb_003",
+    "title": "Mr. Mac Internal Systems - HubSpot & Square",
+    "category": "internal_systems", 
+    "difficulty": "junior_tech",
+    "estimatedTime": "1-2 minutes",
+    "steps": [
+      "Look up customer in HubSpot using phone number",
+      "Review previous issues and notes",
+      "Check Square Appointments for today's scheduled service",
+      "Update HubSpot with current issue and resolution",
+      "Set follow-up reminder if needed",
+      "Process payment in Square if repair completed"
+    ],
+    "commonIssues": [
+      "Customer not found in HubSpot - create new record",
+      "Previous notes unclear - ask Scott for clarification",
+      "Square appointment time doesn't match - verify with customer"
+    ],
+    "scottsSOP": "Always update HubSpot notes immediately after call. Future techs need to know what was tried.",
+    "escalateIf": [
+      "Payment processing issues in Square",
+      "Customer disputes previous service charges",
+      "HubSpot system is down or running slow"
+    ]
+  }
+]

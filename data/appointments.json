@@ -1,0 +1,26 @@
+[
+  {
+    "id": "appt_001",
+    "customerId": "cust_001", 
+    "customerName": "Jennifer Martinez",
+    "time": "2:15 PM Today",
+    "issue": "iPhone email not working after iOS update",
+    "squareAppointmentId": "sq_appt_789",
+    "estimatedDuration": "30 minutes",
+    "status": "in_progress",
+    "assignedTech": "Kyle (Junior)",
+    "priority": "high"
+  },
+  {
+    "id": "appt_002",
+    "customerId": "cust_002",
+    "customerName": "Robert Chen", 
+    "time": "3:00 PM Today",
+    "issue": "MacBook running slow, possible malware",
+    "squareAppointmentId": "sq_appt_790",
+    "estimatedDuration": "45 minutes", 
+    "status": "scheduled",
+    "assignedTech": "Sarah (Junior)",
+    "priority": "medium"
+  }
+]
